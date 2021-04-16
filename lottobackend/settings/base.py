@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'myapp',
     'gov_lotto',
     'lao_lotto',
+    'hanoi_lotto',
 ]
 
 MIDDLEWARE = [
