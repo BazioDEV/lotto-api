@@ -42,9 +42,12 @@ DEBUG_TOOLBAR_CONFIG = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'testdb.sqlite3')
+
     }
 }
 
 STRIPE_PUBLIC_KEY = ''
 STRIPE_PRIVATE_KEY = ''
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_WHITELIST = ['']

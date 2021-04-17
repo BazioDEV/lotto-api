@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import lao_lotto, lao_vip
+from lao_lotto.models import lao_lotto, lao_vip
 
 class lao_vipSerializer(serializers.ModelSerializer):
     class Meta:

@@ -56,7 +56,7 @@ def update_lao_vip():
     date = json_data['date']
     
     data= {'title':title, 'Five':Five, 'Four':Four, 'Three':Three, 'Two':Two, 'date':date}
-    lao_vip.objects.filter(date=date).update(**data)
+    lao_vip.objects.all().update(**data)
 
 
 create_lao_vip()
@@ -101,7 +101,7 @@ def update_lao_lotto():
     Two = bs.find_all('strong')[7].get_text()
     
     data = ({'title':title, 'Four':Four, 'Three':Three, 'Two':Two, 'date':date})
-    lao_lotto.objects.filter(date=date).update(**data)
+    lao_lotto.objects.all().update(**data)
 
 create_lao_lotto()
 if True:

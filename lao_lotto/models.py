@@ -20,5 +20,3 @@ class lao_lotto(models.Model):
     
     def __str__(self):
         return self.date
-
-    

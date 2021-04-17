@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import hannoi_lotto, hannoi_special, hannoi_vip
+from hanoi_lotto.models import hannoi_lotto, hannoi_special, hannoi_vip
 
 class hannoi_lottoSerializer(serializers.ModelSerializer):
     class Meta:
