@@ -5,7 +5,8 @@ import os
 from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lottobackend.settings.development')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'lottobackend.settings.development')
 
 app = Celery('lottobackend')
 
@@ -25,6 +26,7 @@ def debug_task(self):
     if self.request.delivery_info['redelivered']:
         raise Ignore()
     print('Task has been shutdown !!!')
-    
+
+
 def shutdown(*args, **kwargs):
     app.control.broadcast('shutdown')

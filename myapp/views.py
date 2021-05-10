@@ -1,16 +1,12 @@
-from django.shortcuts import render, redirect
-
-from django.views.generic import View
 from django.core.exceptions import ObjectDoesNotExist
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.shortcuts import redirect, render
+from django.views.generic import View
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import News
-
 from .serializers import NewsSerializer
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
 
 
 def index(request):
@@ -24,10 +20,10 @@ def index(request):
         news = paginator.page(1)
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
-        
+
     context = {
-       'qs': qs,
-       'news': news
+        'qs': qs,
+        'news': news
     }
     return render(request, "news.html", context)
 

@@ -1,9 +1,11 @@
 import json
+from time import sleep
+
 import requests
 from bs4 import BeautifulSoup
 from celery import shared_task
+
 from .models import *
-from time import sleep
 
 
 @shared_task
@@ -23,8 +25,9 @@ def create_lao_vip():
     Three = numOne + numTwo + numThree
     Two = numOne + numTwo
     date = json_data['date']
-    
-    print({'title':title, 'Five':Five, 'Four':Four, 'Three':Three, 'Two':Two, 'date':date})
+
+    print({'title': title, 'Five': Five, 'Four': Four,
+          'Three': Three, 'Two': Two, 'date': date})
 
     lao_vip.objects.create(
         title=title,
@@ -34,9 +37,10 @@ def create_lao_vip():
         Two=Two,
         date=date
     )
-    
+
     sleep(15)
-    
+
+
 @shared_task
 def update_lao_vip():
     print('Updating lao VIP data...')
@@ -54,8 +58,9 @@ def update_lao_vip():
     Three = numOne + numTwo + numThree
     Two = numOne + numTwo
     date = json_data['date']
-    
-    data= {'title':title, 'Five':Five, 'Four':Four, 'Three':Three, 'Two':Two, 'date':date}
+
+    data = {'title': title, 'Five': Five, 'Four': Four,
+            'Three': Three, 'Two': Two, 'date': date}
     lao_vip.objects.all().update(**data)
 
 
@@ -68,16 +73,17 @@ if True:
 @shared_task
 def create_lao_lotto():
     print('Creating lao lotto data...')
-    req = requests.get('https://www.ruay.info/%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AB%E0%B8%A7%E0%B8%A2%E0%B8%A5%E0%B8%B2%E0%B8%A7/')
+    req = requests.get(
+        'https://www.ruay.info/%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AB%E0%B8%A7%E0%B8%A2%E0%B8%A5%E0%B8%B2%E0%B8%A7/')
     bs = BeautifulSoup(req.content, 'html.parser')
     title = bs.find_all('strong')[1].get_text()
     date = bs.find_all('span')[15].get_text()
     Four = bs.find_all('strong')[3].get_text()
     Three = bs.find_all('strong')[6].get_text()
     Two = bs.find_all('strong')[7].get_text()
-    
-    print({'title':title, 'Four':Four, 'Three':Three, 'Two':Two, 'date':date})
-    
+
+    print({'title': title, 'Four': Four, 'Three': Three, 'Two': Two, 'date': date})
+
     lao_lotto.objects.create(
         title=title,
         Four=Four,
@@ -85,23 +91,26 @@ def create_lao_lotto():
         Two=Two,
         date=date
     )
-    
+
     sleep(3)
 
 
 @shared_task
 def update_lao_lotto():
     print('Updating lao lotto data...')
-    req = requests.get('https://www.ruay.info/%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AB%E0%B8%A7%E0%B8%A2%E0%B8%A5%E0%B8%B2%E0%B8%A7/')
+    req = requests.get(
+        'https://www.ruay.info/%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AB%E0%B8%A7%E0%B8%A2%E0%B8%A5%E0%B8%B2%E0%B8%A7/')
     bs = BeautifulSoup(req.content, 'html.parser')
     title = bs.find_all('strong')[1].get_text()
     date = bs.find_all('span')[15].get_text()
     Four = bs.find_all('strong')[3].get_text()
     Three = bs.find_all('strong')[6].get_text()
     Two = bs.find_all('strong')[7].get_text()
-    
-    data = ({'title':title, 'Four':Four, 'Three':Three, 'Two':Two, 'date':date})
+
+    data = ({'title': title, 'Four': Four,
+            'Three': Three, 'Two': Two, 'date': date})
     lao_lotto.objects.all().update(**data)
+
 
 create_lao_lotto()
 if True:
